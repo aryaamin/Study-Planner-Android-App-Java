@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">sp2</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab1txt">1</string>
+    <string name="tab2txt">2</string>
+    <string name="tab3txt">3</string>
+    <string name="tab4txt">4</string>
+    <string name="tab1">Study Plans</string>
+    <string name="tab2">Assignments</string>
+    <string name="tab3">Exams/Quizzes</string>
+    <string name="tab4">Lectures</string>
+</resources>
