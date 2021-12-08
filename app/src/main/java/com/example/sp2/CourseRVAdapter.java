@@ -32,28 +32,6 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
         this.context = context;
     }
 
-//    private long lastTouchTime = 0;
-//    private long currentTouchTime = 0;
-//    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            lastTouchTime = currentTouchTime;
-//            currentTouchTime = System.currentTimeMillis();
-//            dbHandler = new DBHandler(context.getApplicationContext());
-//            //String i = String.valueOf(v.getId());
-//            get
-//            //String item = String.valueOf(courseModalArrayList.get(selected_position).getCourseName());
-//
-//            if (currentTouchTime - lastTouchTime < 250) {
-//                dbHandler.deleteCourse("ssss");
-//                Toast.makeText(context, "gsbx", Toast.LENGTH_SHORT).show();
-//                lastTouchTime = 0;
-//                currentTouchTime = 0;
-//            }
-//
-//        }
-//    };
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -87,7 +65,6 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
                 currentTouchTime = System.currentTimeMillis();
                 String id= String.valueOf(courseModalArrayList.get(holder.getAdapterPosition()).getCourseName());
                 //dbHandler.deleteCourse(id);
-                Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
                 //You can call detail fragment here
 
                 if (currentTouchTime - lastTouchTime < 250) {

@@ -7,6 +7,11 @@
     android:orientation="vertical"
     tools:context=".eventadd">
 
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <!--Edit text to enter course name-->
     <EditText
         android:id="@+id/idEdtCourseName"
@@ -41,25 +46,7 @@
         android:textAllCaps="false" />
 
     <!--new button for opening our course list activity-->
-    <Button
-        android:id="@+id/idBtnReadCourse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Read All Courses"
-        android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/idBtnDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Delete Course"
-        android:textAllCaps="false" />
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

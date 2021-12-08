@@ -11,9 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sp2.DBHandler;
-import com.example.sp2.R;
-import com.example.sp2.ViewCourses;
+import sun.bob.mcalendarview.MCalendarView;
 
 public class eventadd extends AppCompatActivity {
 
@@ -36,8 +34,6 @@ public class eventadd extends AppCompatActivity {
         courseDurationEdt = findViewById(R.id.idEdtCourseDuration);
         courseDescriptionEdt = findViewById(R.id.idEdtCourseDescription);
         addCourseBtn = findViewById(R.id.idBtnAddCourse);
-        readCourseBtn = findViewById(R.id.idBtnReadCourse);
-        deleteCourseBtn = findViewById(R.id.idBtnDelete);
         calendarView = findViewById(R.id.calendarView);
 
         // creating a new dbhandler class
@@ -76,44 +72,16 @@ public class eventadd extends AppCompatActivity {
                     return;
                 }
 
-                // on below line we are calling a method to add new
-                // course to sqlite data and pass all our values to it.
                 dbHandler.addNewCourse(courseName, courseDuration, courseDescription, courseDay[0], courseMonth[0], courseYear[0], courseType);
-
                 // after adding the data we are displaying a toast message.
                 Toast.makeText(eventadd.this, "Course has been added.", Toast.LENGTH_SHORT).show();
                 courseNameEdt.setText("");
                 courseDurationEdt.setText("");
                 courseDescriptionEdt.setText("");
-            }
-        });
-
-        readCourseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // opening a new activity via a intent.
-                Intent i = new Intent(eventadd.this, ViewCourses.class);
+                Intent i = new Intent(eventadd.this, MainActivity.class);
                 startActivity(i);
             }
         });
-
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            String courseName = extras.getString("key");
-//            dbHandler.deleteCourse(courseName);
-//            Intent i = new Intent(eventadd.this, ViewCourses.class);
-//            startActivity(i);
-//
-//            //The key argument here must match that used in the other activity
-//        }
-//
-//        if (extras != null) {
-//            courseType = extras.getString("key1");
-//            //The key argument here must match that used in the other activity
-//        }
-
-
-
 
         if (getIntent().getExtras() != null) {
             String activityFrom = getIntent().getStringExtra(TAG_ACTIVITY_FROM);
@@ -123,6 +91,9 @@ public class eventadd extends AppCompatActivity {
 
                 String courseName = s11;
                 dbHandler.deleteCourse(courseName);
+  
+                
+                Toast.makeText(this, "Course Deleted", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(eventadd.this, MainActivity.class);
                 startActivity(i);
 
@@ -132,20 +103,5 @@ public class eventadd extends AppCompatActivity {
                 courseType = s11;
             }
         }
-
-        deleteCourseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // calling a method to delete our course.
-
-                String courseName = courseNameEdt.getText().toString();
-//                String courseDuration = courseDurationEdt.getText().toString();
-//                String courseDescription = courseDescriptionEdt.getText().toString();
-
-
-                dbHandler.deleteCourse(courseName);
-                Toast.makeText(eventadd.this, "Deleted the course", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

@@ -18,6 +18,13 @@
         android:id="@+id/addbutton2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="ADD ASSIGNMENTS" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="DOUBLE CLICK EVENT TO DELETE" />
 
 </FrameLayout>

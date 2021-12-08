@@ -75,4 +75,12 @@ public class fourthFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getActivity().getSupportFragmentManager().beginTransaction().detach(this).attach(this).commit();
+
+    }
+
 }

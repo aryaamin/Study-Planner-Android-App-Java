@@ -17,4 +17,12 @@ public class MainFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getActivity().getSupportFragmentManager().beginTransaction().detach(this).attach(this).commit();
+
+    }
 }

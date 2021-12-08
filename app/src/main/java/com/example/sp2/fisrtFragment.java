@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 
 public class fisrtFragment extends Fragment {
@@ -74,5 +75,7 @@ public class fisrtFragment extends Fragment {
         coursesRV.setAdapter(courseRVAdapter);
         return view;
     }
+
+
 
 }

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             FragmentManager fm1 = getSupportFragmentManager();
             FrameLayout fl = (FrameLayout) findViewById(R.id.tablayout);
             fl.removeAllViews();
-            fm1.beginTransaction().replace(R.id.container_fragment, new FragmentSecond()).commit();
+            fm1.beginTransaction().replace(R.id.container_fragment, new CalenderFragment()).commit();
 
         }
         return true;
