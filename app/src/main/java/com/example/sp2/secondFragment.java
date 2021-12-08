@@ -1,64 +1,78 @@
 package com.example.sp2;
 
+import static androidx.lifecycle.Lifecycle.*;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link secondFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class secondFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public secondFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment secondFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static secondFragment newInstance(String param1, String param2) {
-        secondFragment fragment = new secondFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ArrayList<CourseModal> courseModalArrayList;
+    private DBHandler dbHandler;
+    private CourseRVAdapter courseRVAdapter;
+    private RecyclerView coursesRV;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        View view = inflater.inflate(R.layout.fragment_second, container, false);
+
+        Button addbutton2 = (Button) view.findViewById(R.id.addbutton2);
+        addbutton2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String courseType = "Assignments";
+
+                Intent intent = new Intent(getActivity(), eventadd.class);
+                intent.putExtra(eventadd.TAG_ACTIVITY_FROM, "Fromfrag");
+                intent.putExtra(eventadd.VALUE, courseType);
+                view.getContext().startActivity(intent);
+            }
+
+        });
+
+        courseModalArrayList = new ArrayList<>();
+        dbHandler = new DBHandler(getActivity());
+
+        // getting our course array
+        // list from db handler class.
+        for(int i=0; i<dbHandler.readCourses().size(); i++) {
+            if(dbHandler.readCourses().get(i).getCourseType().equals("Assignments")){
+                courseModalArrayList.add(dbHandler.readCourses().get(i));
+            }
+        }
+
+        // on below line passing our array lost to our adapter class.
+        courseRVAdapter = new CourseRVAdapter(courseModalArrayList, getActivity());
+        coursesRV = view.findViewById(R.id.idRVCourses2);
+
+        // setting layout manager for our recycler view.
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        coursesRV.setLayoutManager(linearLayoutManager);
+
+        // setting our adapter to recycler view.
+        coursesRV.setAdapter(courseRVAdapter);
+        return view;
     }
+
 }
