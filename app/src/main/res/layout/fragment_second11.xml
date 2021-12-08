@@ -8,7 +8,7 @@
     <!-- Add TextView to display the date -->
 
     <!-- Add CalendarView to display the Calendar -->
-    <CalendarView
+    <sun.bob.mcalendarview.MCalendarView
         android:id="@+id/calendar"
         android:layout_width="414dp"
         android:layout_height="350dp"
@@ -17,7 +17,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></CalendarView>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingClass"></sun.bob.mcalendarview.MCalendarView>
 
 
 </RelativeLayout>
