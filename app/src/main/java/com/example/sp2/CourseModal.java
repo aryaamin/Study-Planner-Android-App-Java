@@ -2,8 +2,6 @@ package com.example.sp2;
 
 public class CourseModal {
 
-    // variables for our coursename,
-    // description, tracks and duration, id.
     private String courseName;
     private String courseDuration;
     private String courseDay;
@@ -13,7 +11,7 @@ public class CourseModal {
     private String courseType;
     private int id;
 
-    // creating getter and setter methods
+
     public String getCourseName() {
         return courseName;
     }
@@ -78,7 +76,6 @@ public class CourseModal {
         this.id = id;
     }
 
-    // constructor
     public CourseModal(String courseName, String courseDuration, String courseDescription, String courseDay, String courseMonth, String courseYear, String courseType) {
         this.courseName = courseName;
         this.courseDuration = courseDuration;

@@ -39,6 +39,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="550dp"
+        android:id="@+id/courseslist"/>
+
     <ImageButton
         android:id="@+id/backarrow"
         android:layout_width="51dp"

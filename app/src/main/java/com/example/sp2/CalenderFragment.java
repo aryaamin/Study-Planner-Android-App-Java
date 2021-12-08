@@ -1,44 +1,27 @@
 package com.example.sp2;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CalendarView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.TextView;
-
+import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Queue;
-
+import java.util.ArrayList;
 import sun.bob.mcalendarview.MCalendarView;
+import sun.bob.mcalendarview.listeners.OnDateClickListener;
+import sun.bob.mcalendarview.vo.DateData;
 
 public class CalenderFragment extends Fragment{
 
     private MCalendarView calendarView;
     private DBHandler dbHandler;
-    Queue<Integer> qy
-            = new LinkedList<>();
-
-    Queue<Integer> qm
-            = new LinkedList<>();
-
-    Queue<Integer> qd
-            = new LinkedList<>();
+    private ListView courseslist;
+    ArrayList<String> courses = new ArrayList<>();
 
     @Nullable
     @Override
@@ -55,15 +38,15 @@ public class CalenderFragment extends Fragment{
 
         });
 
-
         calendarView = ((MCalendarView) view.findViewById(R.id.calendar));
         dbHandler = new DBHandler(getActivity());
 
-        while(!qy.isEmpty()){
-            calendarView.unMarkDate(qy.peek(), qm.peek(), qd.peek());
-            qy.remove();
-            qm.remove();
-            qd.remove();
+        for(int i=2000; i<2100; i++){
+            for(int j=1; j<13; j++){
+                for(int k=1; k<32; k++){
+                    calendarView.unMarkDate(i, j, k);
+                }
+            }
         }
 
         for(int i=0; i<dbHandler.readCourses().size(); i++) {
@@ -73,20 +56,54 @@ public class CalenderFragment extends Fragment{
             int d = Integer.parseInt(dbHandler.readCourses().get(i).getCourseDay());
 
             calendarView.markDate(y, m, d);
-            qy.add(y);
-            qm.add(m);
-            qd.add(d);
 
         }
+
+        courseslist = ((ListView) view.findViewById(R.id.courseslist));
+
+        calendarView.setOnDateClickListener(new OnDateClickListener(){
+
+            @Override
+            public void onDateClick(View view, DateData date) {
+
+                int no1 = 0;
+                int no2 = 0;
+                int no3 = 0;
+                int no4 = 0;
+                courses.clear();
+                for(int i=0; i<dbHandler.readCourses().size(); i++) {
+                    if(dbHandler.readCourses().get(i).getCourseDay().equals(date.getDayString())) {
+                        if (dbHandler.readCourses().get(i).getCourseType().equals("StudyPlans")) {
+                            no1++;
+                        }
+                        if (dbHandler.readCourses().get(i).getCourseType().equals("Assignments")) {
+                            no2++;
+                        }
+                        if (dbHandler.readCourses().get(i).getCourseType().equals("Exams")) {
+                            no3++;
+                        }
+                        if (dbHandler.readCourses().get(i).getCourseType().equals("Lectures")) {
+                            no4++;
+                        }
+                    }
+                }
+
+                courses.add("StudyPlans    " + no1);
+                courses.add("Assignments   " + no2);
+                courses.add("Exams         " + no3);
+                courses.add("Lectures      " + no4);
+
+                ArrayAdapter<String> coursesAdapter = new ArrayAdapter<String>(
+                        getActivity(),
+                        R.layout.simple_list_item_1,
+                        courses
+                );
+                courseslist.setAdapter(coursesAdapter);
+            }
+
+        });
+
+
         return view;
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//        getActivity().getSupportFragmentManager().beginTransaction().detach(this).attach(this).commit();
-//
-//    }
-
 }

@@ -7,17 +7,15 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import sun.bob.mcalendarview.MCalendarView;
 
 public class eventadd extends AppCompatActivity {
 
     // creating variables for our edittext, button and dbhandler
     private EditText courseNameEdt, courseDurationEdt, courseDescriptionEdt;
-    private Button addCourseBtn, readCourseBtn, deleteCourseBtn;
+    private Button addCourseBtn;
     private DBHandler dbHandler;
     private CalendarView calendarView;
     public static final String VALUE = "value";
@@ -103,5 +101,11 @@ public class eventadd extends AppCompatActivity {
                 courseType = s11;
             }
         }
+    }
+        @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 }

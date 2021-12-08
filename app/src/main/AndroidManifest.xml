@@ -28,11 +28,6 @@
             android:label="addevnt" >
         </activity>
 
-        <activity
-            android:name=".ViewCourses"
-            android:label="vc" >
-        </activity>
-
     </application>
 
 </manifest>

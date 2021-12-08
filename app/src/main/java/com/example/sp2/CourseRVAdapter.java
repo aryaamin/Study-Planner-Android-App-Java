@@ -1,32 +1,21 @@
 package com.example.sp2;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.sp2.CourseModal;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 
 public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHolder> {
 
-    // variable for our array list and context
     private ArrayList<CourseModal> courseModalArrayList;
     private Context context;
     private DBHandler dbHandler;
 
-    // constructor
     public CourseRVAdapter(ArrayList<CourseModal> courseModalArrayList, Context context) {
         this.courseModalArrayList = courseModalArrayList;
         this.context = context;
@@ -35,8 +24,6 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // on below line we are inflating our layout
-        // file for our recycler view items.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_rv_item, parent, false);
         //view.setOnClickListener(mOnClickListener);
         return new ViewHolder(view);
@@ -47,15 +34,14 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // on below line we are setting data 
-        // to our views of recycler view item.
+
         CourseModal modal = courseModalArrayList.get(position);
-        holder.courseNameTV.setText(modal.getCourseName());
-        holder.courseDescTV.setText(modal.getCourseDescription());
-        holder.courseDurationTV.setText(modal.getCourseDuration());
-        holder.courseDayTV.setText(modal.getCourseDay());
-        holder.courseMonthTV.setText(modal.getCourseMonth());
-        holder.courseYearTV.setText(modal.getCourseYear());
+        holder.courseNameTV.setText("Name: "+modal.getCourseName());
+        holder.courseDescTV.setText("Description: "+modal.getCourseDescription());
+        holder.courseDurationTV.setText("Duration: "+modal.getCourseDuration());
+        holder.courseDayTV.setText("Day: "+modal.getCourseDay());
+        holder.courseMonthTV.setText("Month: "+String.valueOf(Integer.parseInt(modal.getCourseMonth())+1));
+        holder.courseYearTV.setText("Year: "+modal.getCourseYear());
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +50,6 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
                 lastTouchTime = currentTouchTime;
                 currentTouchTime = System.currentTimeMillis();
                 String id= String.valueOf(courseModalArrayList.get(holder.getAdapterPosition()).getCourseName());
-                //dbHandler.deleteCourse(id);
-                //You can call detail fragment here
 
                 if (currentTouchTime - lastTouchTime < 250) {
 
@@ -92,18 +76,15 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        // returning the size of our array list
         return courseModalArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        // creating variables for our text views.
         private TextView courseNameTV, courseDescTV, courseDurationTV, courseDayTV, courseMonthTV, courseYearTV;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            // initializing our text views
             courseNameTV = itemView.findViewById(R.id.idTVCourseName);
             courseDescTV = itemView.findViewById(R.id.idTVCourseDescription);
             courseDurationTV = itemView.findViewById(R.id.idTVCourseDuration);
